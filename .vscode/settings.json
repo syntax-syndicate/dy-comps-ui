@@ -1,0 +1,13 @@
+{
+    "image-manager.viewer.imageBackgroundColor": "#ffffff",
+    "tailwindCSS.files.exclude": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/.hg/**",
+        "**/.svn/**",
+        "./src/templates/**",
+        "**/src/templates/**",
+        "src/templates/**",
+        "**/.next/**",
+    ]
+}
