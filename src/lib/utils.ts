@@ -22,10 +22,14 @@ export function isTemplateInfo(value: any): value is TemplateInfo {
   return !!value?.metadata && typeof value.path === "string";
 }
 
-export const getGithubUrl = (path: string) =>
+export const getGithubUrl = (
+  path: string,
+  options: { type: "templates" | "pages" } = { type: "templates" },
+) =>
   OUrl.joinPaths(
     siteConfig.github.repo,
-    "tree/main/src/templates",
+    "blob/master/src",
+    options.type,
     path,
     "index.tsx",
   );

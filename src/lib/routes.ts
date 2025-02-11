@@ -72,4 +72,5 @@ export const routes = {
   home: "/",
   templates: "/templates",
   showcase: "/showcase",
+  pages: "/pages"
 };

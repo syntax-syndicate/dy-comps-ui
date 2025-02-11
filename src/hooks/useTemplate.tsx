@@ -1,8 +1,15 @@
+"use client";
 import { isFalsy } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-export function useTemplate({ path }: { path: string }): React.ReactNode {
+export function useTemplate({
+  path,
+  type = "block",
+}: {
+  path: string;
+  type?: "page" | "block";
+}): React.ReactNode {
   const [Component, setComponent] = useState<
     | React.ComponentType<any> // i don't know
     | React.ReactNode
@@ -17,10 +24,17 @@ export function useTemplate({ path }: { path: string }): React.ReactNode {
 
     setIsLoading(true);
     setComponent(
-      dynamic(() => import(`@/templates/${path}`).catch(setError), {
-        ssr: false, // true mean await, mean's isLoading is true
-        loading: () => <div>Loading...</div>, // when ssr: false,
-      }),
+      dynamic(
+        () =>
+          (type == "page"
+            ? import(`@/pages/${path}`)
+            : import(`@/templates/${path}`)
+          ).catch(setError),
+        {
+          ssr: false, // true mean await, mean's isLoading is true
+          loading: () => <div>Loading...</div>, // when ssr: false,
+        },
+      ),
     );
     setIsLoading(false);
   }, [path]);
