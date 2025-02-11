@@ -13,27 +13,15 @@ export async function generateMetadata({
 }: {
   params: { temp: string[] };
 }): Promise<Metadata | undefined> {
-  // const templates = await getAllTemplates(path.join(...params.temp.slice(0, -1)))
-  // console.log("generateMetadata", templates)
-  const { temp: paramsTemp } = await params;
+  const paramsTemp = (await params).temp;
 
   return {
-    title: paramsTemp.join(" > "),
-    // description,
-    // openGraph: {
-    //   title,
-    //   description,
-    //   type: "article",
-    //   publishedTime: date,
-    //   url: joinPaths(siteConfig.url, "posts", url, true),
-    // },
-    // twitter: {
-    //   title,
-    //   description,
-    // },
-    // alternates: {
-    //   canonical: joinPaths(siteConfig.url, "posts", url, true),
-    // },
+    // title: { absolute: paramsTemp.join(" > ") },
+    title: [...new Set([paramsTemp[0], paramsTemp[paramsTemp.length -1]])].join(" > "),
+    openGraph: {
+      type: "article",
+      title: paramsTemp[paramsTemp.length - 1],
+    },
   };
 }
 

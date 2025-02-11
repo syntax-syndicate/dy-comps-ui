@@ -24,7 +24,10 @@ export const siteConfig = {
   url: url,
   authors: {
     name: "immi",
-    url: "https://github.com/programming-with-ia",
+    url: "",
+    twitter: "https://x.com/o_immi",
+    email: "iafullprogrammer@gmail.com",
+    github: "https://github.com/programming-with-ia",
   },
   github: {
     profile: "https://github.com/programming-with-ia",

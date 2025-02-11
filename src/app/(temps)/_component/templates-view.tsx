@@ -234,7 +234,7 @@ function CollectionCard({
           {Object.keys(collectionInfo.tree)
             .slice(0, 15)
             .map((key, idx) => (
-              <Badge variant={"outline"} key={key + idx}>
+              <Badge variant={"outline"} key={idx}>
                 {key}
               </Badge>
             ))}
