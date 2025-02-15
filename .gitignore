@@ -49,3 +49,4 @@ tempCodeRunnerFile.*
 /scripts/private/
 # public/data/templatesStructure.json
 /src/templates/**/*--ign/
+*.lnk
