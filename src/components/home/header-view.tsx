@@ -8,6 +8,7 @@ import Logo from "../logo";
 import { Link } from "@lexz451/next-nprogress";
 import { siteConfig } from "@/lib/site-config";
 import { routes } from "@/lib/routes";
+import Logos from "@/templates/blocks/others/logos/logos-site";
 
 const HeaderView = () => {
   return (
@@ -41,59 +42,7 @@ const HeaderView = () => {
               </Link>
             </Button>
           </div>
-          <div className="mt-20 flex flex-col items-center gap-4">
-            <p className="text-center: text-muted-foreground lg:text-left">
-              Built with open-source technologies
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {(
-                [
-                  {
-                    title: "Shadcn",
-                    src: "https://ui.shadcn.com/favicon.ico",
-                    className: "dark:invert",
-                  },
-                  {
-                    title: "Typescript",
-                    src: "https://www.typescriptlang.org/icons/icon-72x72.png",
-                  },
-                  {
-                    title: "ReactJS",
-                    src: "https://react.dev/favicon-32x32.png",
-                  },
-                  {
-                    title: "Tailwind CSS",
-                    src: "https://tailwindcss.com/favicons/favicon-32x32.png",
-                  },
-                  {
-                    title: "Framer Motion",
-                    src: "https://framerusercontent.com/images/FEF0Xp0qllCZsG1uilpmdZAzD8.png",
-                  },
-                ] as {
-                  title: string;
-                  src: string;
-                  className?: string;
-                }[]
-              ).map((item, idx) => (
-                <Button
-                  key={idx}
-                  variant={"outline"}
-                  size={"sm"}
-                  className="group py-1"
-                >
-                  <img
-                    className={cn(
-                      "h-6 saturate-0 transition-all group-hover:saturate-100",
-                      item.className,
-                    )}
-                    alt={item.title}
-                    title={item.title}
-                    src={item.src}
-                  />
-                </Button>
-              ))}
-            </div>
-          </div>
+          <Logos />
         </div>
       </div>
     </section>

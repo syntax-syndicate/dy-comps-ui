@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { MdMoreVert } from "react-icons/md";
-import { IoImage } from "react-icons/io5";
+import { EllipsisVertical, Image } from "lucide-react";
 import { RxOpenInNewWindow } from "react-icons/rx";
+
 import {
   cn,
   getGithubUrl,
@@ -162,7 +162,7 @@ function TemplateCard({
             <IconButton
               style={{ "--fit-size": "4rem" }}
               className="mt-auto self-start"
-              icon={<IoImage size={20} />}
+              icon={<Image size={20} />}
               label={"Preview"}
             />
           </ImageDialog> */}
@@ -184,7 +184,7 @@ function TemplateCard({
               variant={"ghost"}
               size={"icon"}
             >
-              <MdMoreVert />
+              <EllipsisVertical />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top">
@@ -194,7 +194,9 @@ function TemplateCard({
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <a target="_blank" href={getGithubUrl(templateInfo.path)}>View on Github</a>
+              <a target="_blank" href={getGithubUrl(templateInfo.path)}>
+                View on Github
+              </a>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -5,7 +5,8 @@ import { clsxLite, cn, getGithubUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeEditorOpenButton } from "@/components/home/theme-editor";
 import { RiGithubFill } from "react-icons/ri";
-import { FaHeart } from "react-icons/fa6";
+import {Heart} from "lucide-react";
+import { siteConfig } from "@/lib/site-config";
 
 function PreCodeTabs({
   tempCompo,
@@ -35,7 +36,7 @@ function PreCodeTabs({
       </TabsList>
       <TabsContent
         data-preview-tab
-        className="relative mt-4 min-h-[80vh] overflow-hidden rounded-xl border"
+        className="relative mt-4 min-h-[80vh] overflow-hidden rounded-xl border grid"
         value={"preview"}
       >
         {tempCompo}
@@ -60,9 +61,9 @@ function PreCodeTabs({
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://github.com/programming-with-ia/programming-with-ia/blob/main/SUPPORT.md"
+              href={siteConfig.authors.support}
             >
-              <FaHeart size={24} />
+              <Heart fill="currentColor" size={24} />
               Support my work
             </a>
           </Button>

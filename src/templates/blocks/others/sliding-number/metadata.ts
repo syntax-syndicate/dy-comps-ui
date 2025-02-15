@@ -1,12 +1,13 @@
 export const metadata: TemplateMetadata = {
   title: "Sliding Number",
-  description: "A simple layout block for use in templates.",
+  description: "CountDown Numbers Animation using framer-motion.",
   tags: [
     "sliding",
     "number",
     "animation",
     "counter",
     "countdown",
+    "framer-motion",
   ],
   createdby: {
     name: "Raul Carini",

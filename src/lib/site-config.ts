@@ -28,6 +28,8 @@ export const siteConfig = {
     twitter: "https://x.com/o_immi",
     email: "iafullprogrammer@gmail.com",
     github: "https://github.com/programming-with-ia",
+    support:
+      "https://github.com/programming-with-ia/programming-with-ia/blob/main/SUPPORT.md",
   },
   github: {
     profile: "https://github.com/programming-with-ia",
