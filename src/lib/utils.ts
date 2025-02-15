@@ -24,19 +24,20 @@ export function isTemplateInfo(value: any): value is TemplateInfo {
 }
 
 export const templatesTypes = {
-  templates: "templates", // blocks
-  pages: "pgs",
+  blocks: "blocks", // blocks
+  pages: "pages",
 } as const;
 
 export const getGithubUrl = (
   path: string,
   options: { type: ValueOf<typeof templatesTypes> } = {
-    type: templatesTypes.templates,
+    type: templatesTypes.blocks,
   },
 ) =>
   OUrl.joinPaths(
     siteConfig.github.repo,
-    "blob/master/src",
+    "blob/master",
+    "src/templates",
     options.type,
     path,
     "index.tsx",

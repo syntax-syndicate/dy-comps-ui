@@ -11,11 +11,11 @@ import { routes } from "@/lib/routes";
 
 const HeaderView = () => {
   return (
-    <section className="md:py-18 container overflow-hidden py-12 lg:py-28">
+    <section className="md:py-18 container overflow-hidden py-12 lg:py-24">
       <Grid size={50} />
       <div className="mx-auto flex max-w-5xl flex-col items-center">
         <div className="z-10 flex flex-col items-center gap-6 text-center">
-          <Logo className="size-16" />
+          <Logo className="size-28" />
           <Badge variant="outline" className="bg-background">
             {siteConfig.nameTitle}
           </Badge>

@@ -1,14 +1,15 @@
 "use client";
-import { isFalsy } from "@/lib/utils";
+import { isFalsy, templatesTypes } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { ValueOf } from "type-fest";
 
 export function useTemplate({
   path,
-  type = "block",
+  type = templatesTypes.blocks,
 }: {
   path: string;
-  type?: "page" | "block";
+  type?: ValueOf<typeof templatesTypes>;
 }): React.ReactNode {
   const [Component, setComponent] = useState<
     | React.ComponentType<any> // i don't know
@@ -24,17 +25,10 @@ export function useTemplate({
 
     setIsLoading(true);
     setComponent(
-      dynamic(
-        () =>
-          (type == "page"
-            ? import(`@/pages/${path}`)
-            : import(`@/templates/${path}`)
-          ).catch(setError),
-        {
-          ssr: false, // true mean await, mean's isLoading is true
-          loading: () => <div>Loading...</div>, // when ssr: false,
-        },
-      ),
+      dynamic(() => import(`@/templates/${type}/${path}`).catch(setError), {
+        ssr: false, // true mean await, mean's isLoading is true
+        loading: () => <div>Loading...</div>, // when ssr: false,
+      }),
     );
     setIsLoading(false);
   }, [path]);

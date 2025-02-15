@@ -50,7 +50,8 @@
   "exclude": [
     "node_modules",
     "components",
-    ".next"
+    ".next",
+    // "./src/templates/**"
   ],
   "ts-node": {
     "esm": true

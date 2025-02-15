@@ -5,7 +5,7 @@ console.log("Generating...");
 import fs from "fs-extra";
 import path from "path";
 
-const BASE_DIR = "./src/templates";
+const BASE_DIR = "./src/templates/blocks";
 const OUTPUT_FILE = "./public/data/templatesStructure.json";
 
 const metadataFileName = "metadata.ts";
