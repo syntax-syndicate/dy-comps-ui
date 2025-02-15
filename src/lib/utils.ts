@@ -3,6 +3,7 @@ import { clsx as clsxLite } from "clsx/lite";
 import { twMerge } from "tailwind-merge";
 import { siteConfig } from "./site-config";
 import { OUrl } from "./routes";
+import type { ValueOf } from "type-fest";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,9 +23,16 @@ export function isTemplateInfo(value: any): value is TemplateInfo {
   return !!value?.metadata && typeof value.path === "string";
 }
 
+export const templatesTypes = {
+  templates: "templates", // blocks
+  pages: "pgs",
+} as const;
+
 export const getGithubUrl = (
   path: string,
-  options: { type: "templates" | "pages" } = { type: "templates" },
+  options: { type: ValueOf<typeof templatesTypes> } = {
+    type: templatesTypes.templates,
+  },
 ) =>
   OUrl.joinPaths(
     siteConfig.github.repo,

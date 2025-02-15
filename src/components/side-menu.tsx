@@ -13,7 +13,7 @@ import {
   Menu,
 } from "lucide-react";
 
-import { cn, getGithubUrl } from "@/lib/utils";
+import { cn, getGithubUrl, templatesTypes } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -49,7 +49,7 @@ const navItems: NavItem[] = [
   {
     icon: File,
     label: "View on Github",
-    href: getGithubUrl("home1", { type: "pages" }),
+    href: getGithubUrl("home1", { type: templatesTypes.pages }),
   },
 ];
 
