@@ -50,3 +50,4 @@ tempCodeRunnerFile.*
 # public/data/templatesStructure.json
 /src/templates/**/*--ign/
 *.lnk
+cmscripts.json

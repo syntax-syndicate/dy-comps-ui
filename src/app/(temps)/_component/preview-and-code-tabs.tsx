@@ -1,11 +1,11 @@
 // "use client";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { clsxLite, cn, getGithubUrl } from "@/lib/utils";
+import { clsxLite, cn, Files, getGithubUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeEditorOpenButton } from "@/components/home/theme-editor";
 import { RiGithubFill } from "react-icons/ri";
-import {Heart} from "lucide-react";
+import { FileIcon, Heart } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 
 function PreCodeTabs({
@@ -13,11 +13,13 @@ function PreCodeTabs({
   codeCompo, // use in feature serverside
   className,
   path,
+  otherFiles,
 }: {
   tempCompo: React.ReactNode;
   codeCompo: React.ReactNode; // use in feature serverside
   path: string;
   className?: string;
+  otherFiles?: string[] | null;
 }) {
   const triggerCns =
     "relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none hover:border-b-muted-foreground data-[state=active]:border-b-primary data-[state=active]:shadow-none";
@@ -36,7 +38,7 @@ function PreCodeTabs({
       </TabsList>
       <TabsContent
         data-preview-tab
-        className="relative mt-4 min-h-[80vh] overflow-hidden rounded-xl border grid"
+        className="relative mt-4 grid min-h-[80vh] overflow-hidden rounded-xl border"
         value={"preview"}
       >
         {tempCompo}
@@ -45,12 +47,33 @@ function PreCodeTabs({
         data-code-tab
         className={clsxLite(
           "group relative h-[80vh] overflow-hidden rounded-xl border",
-          "flex flex-col items-center justify-center gap-3",
+          "flex gap-3",
         )}
         value={"code"}
       >
+        {otherFiles && (
+          <div className="hidden min-w-[280px] border-r py-4 lg:block">
+            <b className="mb-4 inline-flex px-4 text-muted-foreground">
+              Explorer
+            </b>
+            <ol className="flex flex-col">
+              {[Files.default, ...otherFiles].map((fileName, idx) => (
+                <a
+                  className="inline-flex items-center gap-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground"
+                  key={idx}
+                  role="listitem"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={getGithubUrl(path, { file: fileName })}
+                >
+                  <FileIcon size={18} /> {fileName}
+                </a>
+              ))}
+            </ol>
+          </div>
+        )}
         {/* {codeCompo} */}
-        <div className="flex max-w-[80%] flex-wrap items-center justify-center gap-2">
+        <div className="m-auto flex max-w-[80%] flex-1 flex-wrap items-center justify-center gap-2 p-8">
           <p className="mb-2 basis-full text-center text-muted-foreground">
             😢 Oops! The code isn&apos;t available here due to limited
             resources. But you can check it out on GitHub ⭐ and support my

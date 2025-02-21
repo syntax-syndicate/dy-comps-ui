@@ -28,19 +28,22 @@ export const templatesTypes = {
   pages: "pages",
 } as const;
 
+export const Files = {
+  default: "index.tsx",
+  metadata: "metadata.ts",
+} as const;
+
 export const getGithubUrl = (
   path: string,
-  options: { type: ValueOf<typeof templatesTypes> } = {
-    type: templatesTypes.blocks,
-  },
+  options?: { type?: ValueOf<typeof templatesTypes>; file?: string },
 ) =>
   OUrl.joinPaths(
     siteConfig.github.repo,
     "blob/master",
     "src/templates",
-    options.type,
+    options?.type ?? templatesTypes.blocks,
     path,
-    "index.tsx",
+    options?.file ?? Files.default,
   );
 
 export function getNestedValue<T>(
