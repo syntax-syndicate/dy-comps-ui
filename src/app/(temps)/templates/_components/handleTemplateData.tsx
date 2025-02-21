@@ -2,13 +2,16 @@
 import { useEffect } from "react";
 import { currentTemplateDataEmittor } from "./emittors";
 import { useFetch } from "@/hooks/useFetch";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { getNestedValue } from "@/lib/utils";
 import { OUrl, routes } from "@/lib/routes";
 import { siteConfig } from "@/lib/site-config";
 
+type __ = TemplateStructure["tree"]; //* show error incase of any change
+
 function HandleTemplateData() {
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   console.log(
     "data url",
     OUrl.joinPaths(siteConfig.url, "/data/templatesStructure.json"),
@@ -30,14 +33,16 @@ function HandleTemplateData() {
 
   useEffect(() => {
     if (!tempData || !window.location.pathname.startsWith(routes.templates))
-      return console.log("Data not found", tempData, error, isLoading);
+      return console.log(
+        "Data not found or invalid Path",
+        tempData,
+        error,
+        isLoading,
+      );
     console.log("Data found", tempData, error, isLoading);
 
-    const path = pathname
-      .replace(new RegExp("^" + routes.templates), "")
-      .replace(/^\/|\/$/g, "");
+    const path = searchParams.get("path") || "";
 
-    let b: TemplateStructure["tree"]; // show error incase of change any change
     currentTemplateDataEmittor.setState({
       data: getNestedValue(
         tempData,
@@ -55,7 +60,7 @@ function HandleTemplateData() {
       currentTemplateDataEmittor.state.path,
       path,
     );
-  }, [tempData, isLoading, pathname, error]);
+  }, [tempData, isLoading, searchParams, error]);
 
   if (error)
     console.error("Something want wrong while fetching templates data", error);

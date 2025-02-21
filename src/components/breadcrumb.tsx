@@ -3,8 +3,9 @@ import { cn } from "@/lib/utils";
 // import { Link } from "@lexz451/next-nprogress";
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import TemplateLink from "@/components/template-link";
+import { OUrl, routes } from "@/lib/routes";
 
 function Breadcrumb({
   className,
@@ -44,17 +45,19 @@ function Item({
 }
 
 export function BreadcrumbGen() {
-  const pathname = usePathname();
-  if (pathname == "/") return null;
-  const items = pathname.split("/").filter(Boolean);
-  console.log("pathname", pathname);
+  const searchParams = useSearchParams();
+  const path = searchParams.get("path") || "";
+  const items = path.split("/").filter(Boolean);
   return (
     <Breadcrumb className="mb-3 self-start px-6 md:px-10 lg:px-16">
-      <Item href={"/"}>Home</Item>
-      {/* <ChevronRight className="text-muted-foreground" size={20} /> */}
-      {/* <Item href={"/templates"}>Templates</Item> */}
+      <Item href={routes.home}>Home</Item>
+      <Item href={routes.templates}>Templates</Item>
       {items?.map((item, idx) => {
-        const href = "/" + items.slice(0, idx + 1).join("/");
+        const href = OUrl.addSearchParam(
+          routes.templates,
+          "path",
+          items.slice(0, idx + 1).join("/"),
+        );
         return (
           <React.Fragment key={idx}>
             {/* idx != 0 && */}

@@ -49,7 +49,10 @@ export function TemplatesView() {
         <>
           <section className="grid px-6 md:px-10 lg:px-16">
             <TemplateHeader {...templatesInfo.metadata} />
-            <TemplateShowcaseNew path={path} />
+            <TemplateShowcaseNew
+              path={path}
+              otherFiles={templatesInfo.otherFiles}
+            />
           </section>
         </>
       ) : (
@@ -68,7 +71,7 @@ export function TemplatesView() {
             details={templatesInfo.cnt}
           />
           <TemplatesGroup
-            href={OUrl.joinPaths(routes.templates, path)}
+            href={OUrl.addSearchParam(routes.templates, "path", path)}
             breadcrumb={crumb}
             templates={templatesInfo}
           />
@@ -91,7 +94,9 @@ function TemplatesGroup({
   const templatesArray: React.ReactNode[] = [];
 
   Object.entries(templates.tree).forEach(([key, value]) => {
-    const url = OUrl.joinPaths(href, key);
+    const url = OUrl.addSearchParam(href, "path", (old) =>
+      OUrl.joinPaths(old, key),
+    );
     if (isTemplateInfo(value)) {
       templatesArray.push(
         <TemplateCard name={key} href={url} templateInfo={value} />,
@@ -135,7 +140,6 @@ function TemplateCard({
   name: string;
   href: string;
 }) {
-  // const href = OUrl.joinPaths(routes.templates, templateInfo.path) //*
   return (
     <>
       <TempCard type="Template">
@@ -156,7 +160,7 @@ function TemplateCard({
         )}
         <div className="mt-2 flex flex-wrap gap-4 lg:mt-4">
           {/* <ImageDialog
-            src={"https://www.shadcnblocks.com/images/hero/testimonial7.webp"}
+            src={"https://dycomps.oimmi.com/images/hero/hero1.webp"}
             alt={templateInfo.metadata.title ?? templateInfo.path}
           >
             <IconButton
@@ -172,7 +176,7 @@ function TemplateCard({
             label={"View"}
             As={TemplateLink}
             prefetch={false}
-            href={OUrl.joinPaths(routes.templates, templateInfo.path)}
+            href={href}
           />
         </div>
 
@@ -194,7 +198,12 @@ function TemplateCard({
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <a target="_blank" href={getGithubUrl(templateInfo.path)}>
+              <a
+                target="_blank"
+                href={getGithubUrl(
+                  new OUrl("www.oimmi.com", href).getSearchParam("path") ?? "",
+                )}
+              >
                 View on Github
               </a>
             </DropdownMenuItem>

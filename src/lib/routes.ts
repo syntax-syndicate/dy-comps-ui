@@ -31,6 +31,35 @@ export class OUrl extends URL {
       : joinedPath.replace(/\/+/g, "/");
   }
 
+  static trimSlashes(str: string) {
+    return str.replace(/^\/|\/$/g, "");
+  }
+  static ifNull(value: any) {
+    return ["", null, undefined].includes(value as string);
+  }
+  static addSearchParam(
+    url: string,
+    key: string,
+    value: string | ((previousValue: string) => string),
+  ): string {
+    const hasProtocol = OUrl.hasProtocol(url);
+    const fakeBaseUrl = "https://oimmi.com";
+
+    const urlObj = hasProtocol ? new URL(url) : new URL(url, fakeBaseUrl);
+    const currentValue = urlObj.searchParams.get(key);
+
+    const newValue =
+      typeof value === "function" ? value(currentValue || "") : value;
+    urlObj.searchParams.set(key, newValue);
+
+    if (OUrl.ifNull(newValue)) {
+      return url;
+    }
+
+    let finalUrl = urlObj.toString();
+    return hasProtocol ? finalUrl : finalUrl.replace(fakeBaseUrl, "");
+  }
+
   toString(
     options: { withoutProtocol?: boolean; withoutSearchParams?: boolean } = {},
   ): string {
@@ -73,5 +102,5 @@ export const routes = {
   templates: "/templates",
   showcase: "/showcase",
   pages: "/pages",
-  hooks: "/hooks"
+  hooks: "/hooks",
 };
