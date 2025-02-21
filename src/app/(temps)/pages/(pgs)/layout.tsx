@@ -1,17 +1,9 @@
-import { SideMenu } from "@/components/side-menu";
+import CleanPage from "../../_component/clean-page";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <SideMenu />
-      <style global>
-        {`
-	  #dy-footer,
-	  #dy-navbar {
-		display: none !important;
-	  }
-	`}
-      </style>
+    <CleanPage />
       {children}
     </>
   );
