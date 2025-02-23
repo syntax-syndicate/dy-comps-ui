@@ -1,6 +1,6 @@
 import { BreadcrumbGen } from "@/components/breadcrumb";
 import HandleTemplateData from "./_components/handleTemplateData";
-
+import React from "react";
 export default function TemplatesLayout({
   children,
 }: {
@@ -9,9 +9,11 @@ export default function TemplatesLayout({
   return (
     <>
       <main className="grid gap-6">
-        <BreadcrumbGen />
+        <React.Suspense>
+          <BreadcrumbGen />
+          <HandleTemplateData />
+        </React.Suspense>
         {children}
-        <HandleTemplateData />
       </main>
     </>
   );

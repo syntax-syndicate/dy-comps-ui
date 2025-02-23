@@ -43,7 +43,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 # idea files
-.idea
+*.idea
 
 tempCodeRunnerFile.*
 /scripts/private/
