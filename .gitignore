@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Don't ignore the .gitignore itself
+!.gitignore
+
+# Allow only "my-folder" and its contents
+!scaflos
