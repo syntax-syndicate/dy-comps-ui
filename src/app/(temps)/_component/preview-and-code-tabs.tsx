@@ -1,12 +1,14 @@
 // "use client";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { clsxLite, cn, Files, getGithubUrl } from "@/lib/utils";
+import { clsxLite, cn, Files, getGithubUrl, getScafloUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeEditorOpenButton } from "@/components/home/theme-editor";
 import { RiGithubFill } from "react-icons/ri";
 import { FileIcon, Heart } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
+import { OUrl } from "@/lib/routes";
+import { ScafloCommand } from "./scaflo-command-copy";
 
 function PreCodeTabs({
   tempCompo,
@@ -73,33 +75,37 @@ function PreCodeTabs({
           </div>
         )}
         {/* {codeCompo} */}
-        <div className="m-auto flex max-w-[80%] flex-1 flex-wrap items-center justify-center gap-2 p-8">
+        <div className="flex flex-col m-auto max-w-[80%] flex-1 items-center justify-center gap-2 p-8">
           <p className="mb-2 basis-full text-center text-muted-foreground">
             😢 Oops! The code isn&apos;t available here due to limited
             resources. But you can check it out on GitHub ⭐ and support my
             work! ❤️
           </p>
 
-          <Button asChild variant={"destructive"}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={siteConfig.authors.support}
-            >
-              <Heart fill="currentColor" size={24} />
-              Support my work
-            </a>
-          </Button>
-          <Button asChild variant={"secondary"}>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={getGithubUrl(path)}
-            >
-              <RiGithubFill size={24} />
-              View on Github
-            </a>
-          </Button>
+          <ScafloCommand className="w-3/5 my-6" path={path} />
+
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant={"destructive"}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={siteConfig.authors.support}
+              >
+                <Heart fill="currentColor" size={24} />
+                Support my work
+              </a>
+            </Button>
+            <Button asChild variant={"secondary"}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={getGithubUrl(path)}
+              >
+                <RiGithubFill size={24} />
+                View on Github
+              </a>
+            </Button>
+          </div>
         </div>
       </TabsContent>
     </Tabs>

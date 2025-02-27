@@ -46,6 +46,19 @@ export const getGithubUrl = (
     options?.file ?? Files.default,
   );
 
+export function getScafloUrl({
+  path,
+  type = "blocks",
+}: {
+  path: string;
+  type?: ValueOf<typeof templatesTypes>;
+}) {
+  return OUrl.joinPaths(
+    "https://raw.githubusercontent.com/programming-with-ia/dy-comps/scaflos/scaflo",
+    type,
+    path + ".json",
+  );
+}
 export function getNestedValue<T>(
   obj: Record<string, any>,
   path: string | undefined | null,
